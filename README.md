@@ -7,7 +7,7 @@ Initialization:
 npm install
 
 Run:
-npm run jira-username jira-password
+npm start jira-username jira-password
 
 example
-npm run eugene_batareykin@gmail.com zxczcvzcv
+npm start eugene_batareykin@gmail.com zxczcvzcv
