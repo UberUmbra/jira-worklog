@@ -35,7 +35,7 @@ jira.search.search({
   } else {
     Promise.all(res.issues.map(getWorkLog)).then(
       (worklogs) => {
-        worklogs.map((issueWorklog, index) => {
+        var entries = worklogs.map((issueWorklog, index) => {
           var key = res.issues[index].key;
           return issueWorklog.worklogs.filter((logEntry) => logEntry.author.name === user)
             .map((entry) => {
@@ -47,8 +47,13 @@ jira.search.search({
               }
             })
         }).reduce((acc, arr) => [...acc, ...arr], [])
-          .sort((a, b) => a.date.getTime()-b.date.getTime())
-          .forEach(entry=> console.log(entry.key, entry.timeSpent, entry.comment, entry.date))
+          .sort((a, b) => a.date.getTime()-b.date.getTime());
+        if(entries.length > 0) {
+          entries.forEach(entry=> console.log(entry.key, entry.timeSpent, entry.comment, entry.date))
+        } else {
+          console.log("No time logged so far");
+        }
+
       }).catch(console.log);
   }
 });
